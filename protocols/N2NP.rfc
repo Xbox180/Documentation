@@ -1,4 +1,4 @@
-───────────────────────────────────────────────────────────────────────────────
+﻿───────────────────────────────────────────────────────────────────────────────
 
 
 
@@ -43,6 +43,7 @@ November 2017                                             Node to Node Protocol
 
                                TABLE OF CONTENTS
 
+
 1.  INTRODUCTION ............................................................ 3
 
   1.1 Scope of this document ................................................ 3
@@ -63,34 +64,33 @@ November 2017                                             Node to Node Protocol
   3.1 PING .................................................................. 7
   3.2 PONG .................................................................. 7
   3.3 SERVICE ............................................................... 7
-  3.4 PEERS ................................................................. 9
 
-4. SERVICES .................................................................12
+4. SERVICES .................................................................
 
-  4.1 CHAT ................................................................. 12
-    4.1.1 Source and Destination User ID ................................... 12
-    4.1.2 Sequence Number .................................................. 13
-    4.1.3 Flags ............................................................ 13
-    4.1.4 Message .......................................................... 14
-  4.2 BROADCAST ............................................................ 15
-    4.2.1 Issued Timestamp & Expires ....................................... 15
-    4.2.2 Message .......................................................... 16
+  4.1 CHAT ................................................................. 10
+    4.1.1 Source and Destination User ID ................................... 10
+    4.1.2 Sequence Number .................................................. 11
+    4.1.3 Flags ............................................................ 11
+    4.1.4 Message .......................................................... 12
+  4.2 BROADCAST ............................................................ 13
+    4.2.1 Issued Timestamp & Expires ....................................... 13
+    4.2.2 Message .......................................................... 14
 
                                                                        [Page 1]
 ───────────────────────────────────────────────────────────────────────────────
 ───────────────────────────────────────────────────────────────────────────────
 November 2017                                             Node to Node Protocol
 
-5.  ROUTING ................................................................ 17
 
-  5.1. PEER INFORMATIONS ................................................... 17
-    5.1.1. Score calculation ............................................... 17
-    5.1.2. Update Broadcast ................................................ 18
-    5.1.3. Update Broadcast data optimization .............................. 18
-  5.2. ROUTING ALGORITHM ................................................... 19
-    5.2.1. General Description ............................................. 19
-    5.2.2. Dijkstra's algorithm ............................................ 20
-    5.2.3. Broadcast routing ............................................... 20
+
+
+
+
+
+
+
+
+
 
 
 
@@ -152,8 +152,8 @@ device driver.
 
 1.3.  References
 
-  [1] TCP RFC793           https://tools.ietf.org/html/rfc793
-  [2] Dijkstra's_algorithm https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm
+  [1] TCP RFC793 https://tools.ietf.org/html/rfc793
+
 
 
                                                                        [Page 3]
@@ -226,13 +226,13 @@ November 2017                                             Node to Node Protocol
 
 2.3  Device Identification
 
-  In order to identify a device from another, the N2NP protocol use an hashed
-  identifier, on 4 bytes. The original hashed content and the size of those
+  In order to identify a device from another, the N2NP protocol will use an hashed
+  identifier of 4 bytes. The original hashed content and the size of those
   fields are not decided yet, so those are subjects to changes.
   In a packet, the protocol shall define a source identifier (FROM) and a
-  destination identifier (TO). These fields are to be used by the neighbors
+  destination identifier (TO). These fields are to be used by the neighbors'
   nodes in order to relay the packet to its final destination.
-  A routing algorithm could be used too, in order to accelerate this process.
+  A routing algorithm could be used also, in order to accelerate this process.
 
 
 
@@ -367,28 +367,28 @@ November 2017                                             Node to Node Protocol
   The SERVICE packet type is described with 0x3 (3) in the packet type field.
 
 
-3.4. PEERS
-
- The PEERS packet type describe the state of a node with its neighbors. It can
- be used for different purposes, when a client is joining the network, to 
- update the score of a peer or when a node loose a peer. It is described with
- the value 0x4 (4) in the packet type field.
-
-                              PEERS packet header
-
-┏━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-┃ Octet ┃               0               ┃                 1                   ┃
-┃       ┣━━━┳━━━┳━━━┳━━━┳━━━┳━━━┳━━━┳━━━╋━━━┳━━━━━━━━┳━━━━┳━━━━┳━━━━┳━━━━┳━━━━┃
-┃       ┃ 0 ┃ 1 ┃ 2 ┃ 3 ┃ 4 ┃ 5 ┃ 6 ┃ 7 ┃ 8 ┃ 9 ┃ 10 ┃ 11 ┃ 12 ┃ 13 ┃ 14 ┃ 15 ┃
-┡━━━━━━━╇━━━┻━━━┻━━━┻━━━┻━━━┻━━━┻━━━┻━━━╇━━━┻━━━┻━━━━┻━━━━┻━━━━┻━━━━┻━━━━┻━━━━┩
-│ 0     │           Peer size           │                Data                 │
-├───────┼───────────────────────────────┘                                     │
-│ 2     │                            Data ...                                 │
-└───────┴─────────────────────────────────────────────────────────────────────┘
 
 
-  The Peer size field does describe the number of couples score-ID
-  present in the packet. A score - device ID pair is a simple data structure:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -397,86 +397,6 @@ November 2017                                             Node to Node Protocol
 
 
                                                                        [Page 9]
-───────────────────────────────────────────────────────────────────────────────
-───────────────────────────────────────────────────────────────────────────────
-November 2017                                             Node to Node Protocol
-
-┏━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-┃ Octet ┃               0               ┃                 1                   ┃
-┃       ┣━━━┳━━━┳━━━┳━━━┳━━━┳━━━┳━━━┳━━━╋━━━┳━━━━━━━━┳━━━━┳━━━━┳━━━━┳━━━━┳━━━━┃
-┃       ┃ 0 ┃ 1 ┃ 2 ┃ 3 ┃ 4 ┃ 5 ┃ 6 ┃ 7 ┃ 8 ┃ 9 ┃ 10 ┃ 11 ┃ 12 ┃ 13 ┃ 14 ┃ 15 ┃
-┡━━━━━━━╇━━━┻━━━┻━━━┻━━━┻━━━┻━━━┻━━━┻━━━╇━━━┻━━━┻━━━━┻━━━━┻━━━━┻━━━━┻━━━━┻━━━━┩
-│ 0     │             Score             │             Device ID               │
-├───────┼───────────────────────────────┘                                     │
-│ 2     │                            Device ID                                │
-├───────┤                               ┌─────────────────────────────────────┘
-│ 4     │             Device ID         │
-└───────┴───────────────────────────────┘
-
-  The Score field describe the current score of the Device ID node, perceived
-  by the source node; It is used to choose a best path when routing is needed.
-  The Device ID describes the peer device ID, on 4 bytes.
-
-  Those packets are broadcast by nature; If a client should receive a PEERS
-  packet, the Destination Device Identifier in the N2NP header shall be set at
-  0. Upon joining, a new node wanting to announce itself on the network must
-  use a PEER packet: It announces the current peers of the node, and the score.
-  For peer list and score calculation, see the relevant section. It is also
-  used when a node want to announce an update on his peers: A peer has been 
-  lost, a peer score has changed, or a new peer has arrived.
-
-  Upon reception of a PEER packet, a client must update his intern routing 
-  table with the informations in the PEER packet. A routing table entry consist
-  of two things: The mother device ID, and a list of paired score-IDS of the
-  peers linked with the mother device. It could be represented like that:
-
-
-
-
-
-
-
-                                                                      [Page 10]
-───────────────────────────────────────────────────────────────────────────────
-───────────────────────────────────────────────────────────────────────────────
-November 2017                                             Node to Node Protocol
-
-    struct {
-        uint32_t        node_id;
-
-        struct {
-            uint8_t             score;
-            uint32_t            id;
-            struct list_head    next;
-        } neighbors;
-    };
-
-  The PEER packet is join-agnostic: A client receiving a packet must not care
-  if the sender just joined the network or just updating informations about his
-  peers. The client must update his intern routing table either way, and create
-  a new entry when it is required. A C representation of the routing table
-  could be:
-
-    typedef struct {
-        struct node_entry_s {
-            uint32_t    node_id;
-
-            struct {
-                uint8_t                 score;
-                struct node_entry_s     *id;
-                struct list_head        next;
-            };
-
-            struct list_head            next;
-        };
-    } routing_table_t;
-
-  It is worth noting that a pointer or a 32 bits unsigned int for the ID field
-  will be the same thing, as both types takes 4 bytes in ARMv5l. Theoretically,
-  an entry will size 25 bytes in memory; In practice, GCC will align the struct
-  on an 8 byte word, therefore padding the structure up to 32 bytes.
-
-                                                                      [Page 11]
 ───────────────────────────────────────────────────────────────────────────────
 ───────────────────────────────────────────────────────────────────────────────
 November 2017                                             Node to Node Protocol
@@ -516,7 +436,7 @@ November 2017                                             Node to Node Protocol
   One might think that this information is redundant with the devices IDs in
   the header, but the service should be able to support multiple users on a
   single device.
-                                                                      [Page 12]
+                                                                      [Page 10]
 ───────────────────────────────────────────────────────────────────────────────
 ───────────────────────────────────────────────────────────────────────────────
 November 2017                                             Node to Node Protocol
@@ -557,7 +477,7 @@ November 2017                                             Node to Node Protocol
   acknowledged.
 
 
-                                                                      [Page 13]
+                                                                      [Page 11]
 ───────────────────────────────────────────────────────────────────────────────
 ───────────────────────────────────────────────────────────────────────────────
 November 2017                                             Node to Node Protocol
@@ -597,7 +517,7 @@ November 2017                                             Node to Node Protocol
   one. It is assumed that this field is encoded with utf-8. The size of this
   field is described in the Message Length field. If this field is set at 0, it
   is assumed that the Message field will be empty.
-                                                                      [Page 14]
+                                                                      [Page 12]
 ───────────────────────────────────────────────────────────────────────────────
 ───────────────────────────────────────────────────────────────────────────────
 November 2017                                             Node to Node Protocol
@@ -636,7 +556,7 @@ November 2017                                             Node to Node Protocol
   starting from the Issued timestamp. Client should be doing the following
   addition in order to check the validity of a broadcast
 
-                                                                      [Page 15]
+                                                                      [Page 13]
 ───────────────────────────────────────────────────────────────────────────────
 ───────────────────────────────────────────────────────────────────────────────
 November 2017                                             Node to Node Protocol
@@ -677,205 +597,5 @@ November 2017                                             Node to Node Protocol
 
 
 
-                                                                      [Page 16]
-───────────────────────────────────────────────────────────────────────────────
-───────────────────────────────────────────────────────────────────────────────
-November 2017                                             Node to Node Protocol
-
-                                  5.  ROUTING
-
-Withing the N2NP protocol, routing is done in a special way. Since the network
-mesh is router-less, the routing protocol needs to be gateway agnostic. We got
-also low-data requirements due to physical transportation limitation. And the
-node on the network will be moving, so we need high reliability.
-
-The entire routing is based on the principle that all nodes on the network 
-knows every node's neighbors; Therefore, every node can determin a path for
-every packet.
-
-5.1.  PEER INFORMATIONS
-
-Peers neighbors are not the only information provided by every host on the
-network; Every host assign a score to their neighbors, based on signal strength
-and distance. This value is to be used in the heuristic algorithm in order
-to evaluate the weigth of a path.
-
-5.1.1.  Score calculation
-
-  A score describes the state of a node from the point of of view of another
-  node. Those two nodes must be withing physical reach for a score to be 
-  determined: it is used as weigth value for the path-finding heuristic.
-  A score is determined through the following equation / heuristic:
-
-           /!\ To be determined, needs to be on one byte maximum /!\
-
-
-
-
-
-
-
-
-
-                                                                    [Page 17]
-───────────────────────────────────────────────────────────────────────────────
-───────────────────────────────────────────────────────────────────────────────
-November 2017                                             Node to Node Protocol
-
-5.1.2.  Update Broadcast
-
-  This broadcast is launched when one of the following conditions are met:
-  - A new node is joining the network
-  - An existing node got a new neighbor (New client or a moving node)
-  - A node has timeout
-  - A peer score has changed
-
-  In all of thoses cases, the main node needs to update the whole network if
-  this new information; In order to calculate a path reliably, every node on
-  the network must know the neighbors of everyone: It is not intended to be
-  a real-time information, but rather an indicative information.
-  In order to do that, the node must sent a PEERS packet with all the neighbors
-  information. If a peer did timeout, the main node must sent a PEER entry
-  with a score of 0 (zero). If a peer did not change score, the main node must
-  not add it in its PEERS packet.
-
-5.1.3. Update broadcast data optimization
-
-  In order to gain data bandwidth, broadcast peer update data must be packed
-  whenever its possible. If a node B is to retransmit the update data of the
-  node A, and the node B itself has broadcast data in the output pipe, the 
-  B node must pack the node A information with his information, and send one
-  and only packet to be relayed by its peers. Of course, this packed data
-  length should not exceed the packet maximum size, otherwise the first packet
-  must be relayed without re-writing, and the second one sent aswell.
-  A client, receiving broadcast update data from multiple clients in one packet
-  must deduce the number of nodes implicated by looking at the total length
-  in the N2NP header.
-
-
-
-
-
-
-                                                                     [Page 18]
-───────────────────────────────────────────────────────────────────────────────
-───────────────────────────────────────────────────────────────────────────────
-November 2017                                             Node to Node Protocol
-
-5.2. ROUTING ALGORITHM
-
-When a packet is sent from one device with the intent of speaking to a another
-device directly, routing must be involved. In order to assure delivering 
-reliability, the N2NP uses a mix between an HEAT algorithm, with node score
-attribution, and a static route routing algorithm. You can find the details
-about score attribution in the relevant section, along with the routing table
-information.
-
-5.2.1.  General Description
-
-  The concept of this routing algorithm is quite simple: Every node bound to
-  route a packet from a node A to a node B must determin which route is the 
-  best, on every hop. Let's say we got a node A wanting to send a packet to 
-  node Z; The simple scenario is that those two nodes are physically next to
-  each other: Therefore, no routing is needed. But, if those two nodes are not
-  connected between each other, node A must determin the best route to reach
-  node Z. In order to do that, and with all the informations about all the
-  nodes on the network (See PEERS), the node A must run an heuristic algorithm
-  on all his peers node (physically connected) with the score of each node as
-  weigth. In order not to loose time in the process, the depth used for the
-  algorithm should be minimal: The node A do not need to determin an exact 
-  perfect path all the way to node Z, but rather choose between his direct
-  peers, the one that will be more suited to route this packet.
-
-                              Example mesh network
-
-                / -- Node C - \                       /----- Node E ------
-       / Node B                Node D ------->  Node F                    \
-Node A         \ Node G ----- /    |                  \-- Node H         Node Z
-                                    \ Node I                  \  Node J /
-
-
-
-
-                                                                     [Page 19]
-───────────────────────────────────────────────────────────────────────────────
-───────────────────────────────────────────────────────────────────────────────
-November 2017                                             Node to Node Protocol
-
-  Let's take the above schema: In this example, the node A still wants to reach
-  the node Z. In order to do that, the node A must determin the best path from
-  his direct peer; In this case it's quite simple the node A only has one peer.
-  Node A sents the packet to Node B, and it's the turn of Node B to determin
-  the best path from his peer. Here, we got two peers nodes: C and G. With the
-  both score of those direct peers, and all the ones beyond those ones, node B
-  must know determin the best path to route this packet. It is important to 
-  note that the node B intern routing table, that describes all the scores of
-  everyone on the network, don't need to be updated in real time: The node can
-  determin a good-enough-path to next peer with his data. Let's say, for the 
-  sake of the example, that node C has a score of 40, and G, a score of 55.
-  Since both C and G share the same exit node, D, their exit score will be the
-  same. So the node B must compare the score of C and G in order to route the
-  packet properly. In this example, G got a bigger score than C, so the node B 
-  will route the packet to G. The node G on reception, will do the same 
-  algorithm in order to route the packet to the next node, and the next node
-  will do the same, and so on to the final destination node.
-
-5.2.2. Dijkstra's algorithm
-
-  In order to compute the best path for a packet, a node must use the 
-  Dijkstra's algorithm[1]. Instead of using distance as a sole weigth
-  parameter, the score of the nodes is to be used. See the relevant sections
-  for score calculations.
-
-5.2.3. Broadcast routing
-
-  By nature, broadcast packet do not have a destination: All the members of the
-  networks shall receive the packet. Therefore, the routing algorithm cannot be
-  used in this case. A flood routing algorithm is to be used.
-
-
-
-
-
-                                                                     [Page 20]
-───────────────────────────────────────────────────────────────────────────────
-───────────────────────────────────────────────────────────────────────────────
-November 2017                                             Node to Node Protocol
-
-                             Simple 4 nodes network
-
-                                     Node A
-                                    /     \
-                               Node B     Node D
-                                    \     /
-                                     Node C
-
-  Lets take the above schema: In this example, the node A wants to broadcast
-  a packet tot the network: First, it will send it to his direct neighbors:
-  B and D. Before sending, the node must compute a checksum of the full packet,
-  starting at the N2NP header, and store it. The node D, upon reception of the 
-  packet, and before userland treatment, must do the same: Compute a checksum,
-  and send the packet to his direct neighbors, A and C. C has never seen the
-  packet before: Therefore it will compute and relay it. But the node A did
-  already seen the packet (Since he's the one who sent it). So, upon reception,
-  A will compute the checksum, check with his internal storage, see that
-  this packet has already been relayed, and simply drop it.
-  With this method, we keep simplicity through routing, without much data
-  overhead and broadcast replay problems.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                                     [Page 21]
+                                                                      [Page 14]
 ───────────────────────────────────────────────────────────────────────────────
